@@ -72,6 +72,7 @@
   <ItemGroup>
     <Compile Include="Assets\scripts\bulletphysics.cs" />
     <Compile Include="Assets\scripts\bulletscript.cs" />
+    <Compile Include="Assets\scripts\t\Wind.cs" />
     <Compile Include="Assets\scripts\t\Bullet.cs" />
     <Compile Include="Assets\scripts\t\UIController.cs" />
     <Compile Include="Assets\scripts\t\Player.cs" />

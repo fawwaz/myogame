@@ -4,6 +4,9 @@ public class Player : MonoBehaviour
 {
     [Range(0, 100)]
     public int health;
+
+    [Range(0, 10)]
+    public float strength;
     
     /// <summary>
     /// Melempar sebuah bullet ke arah angle dan strength tertentu.
@@ -21,9 +24,7 @@ public class Player : MonoBehaviour
         // (angle, strength) -> velocity untuk bullet.
         var angleRadian = angle * Mathf.Deg2Rad;
         var velocity = strength * new Vector2(Mathf.Cos(angleRadian), Mathf.Sin(angleRadian));
-
-        Debug.Log(angle + " " + velocity);
-
+        
         bullet.playerOrigin = this;
 
         bulletBody.velocity = velocity;
