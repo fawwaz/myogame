@@ -1,7 +1,7 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "myogame.CSharp", "myogame.CSharp.csproj", "{304EBDBE-E532-2B87-E0EF-FA6D431FDE89}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{1E2A7721-F62B-6F3B-19E2-1FD13FCE21FB}") = "myogame", "Assembly-CSharp.csproj", "{AE2AA758-BA46-AE78-54F7-659C9F3761C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,12 +9,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{304EBDBE-E532-2B87-E0EF-FA6D431FDE89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{304EBDBE-E532-2B87-E0EF-FA6D431FDE89}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{304EBDBE-E532-2B87-E0EF-FA6D431FDE89}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{304EBDBE-E532-2B87-E0EF-FA6D431FDE89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE2AA758-BA46-AE78-54F7-659C9F3761C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE2AA758-BA46-AE78-54F7-659C9F3761C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE2AA758-BA46-AE78-54F7-659C9F3761C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE2AA758-BA46-AE78-54F7-659C9F3761C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
 	EndGlobalSection
 EndGlobal

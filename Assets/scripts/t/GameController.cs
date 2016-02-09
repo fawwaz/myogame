@@ -1,9 +1,19 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+using LockingPolicy = Thalmic.Myo.LockingPolicy;
+using Pose = Thalmic.Myo.Pose;
+using UnlockType = Thalmic.Myo.UnlockType;
+using VibrationType = Thalmic.Myo.VibrationType;
+
 public class GameController : MonoBehaviour
 {
     public GameObject bulletPrefab;
+
+	public GameObject myo1 = null;
+	public GameObject myo2 = null;
+
+	private Pose _lastPose = Pose.Unknown;
 
     public enum GameState
     {
@@ -46,6 +56,7 @@ public class GameController : MonoBehaviour
         {
             case GameState.P1Turn:
             case GameState.P2Turn:
+				
 
                 // Reset strength player.
                 player1.strength = player2.strength = 1;
@@ -69,8 +80,9 @@ public class GameController : MonoBehaviour
                     state = state == GameState.P1Turn ? GameState.P1Throw : GameState.P2Throw;
                 }
                 */
-
-                if (Input.GetKeyDown(KeyCode.Space) && holdAction == null)
+				var myo = state == GameState.P1Turn ? myo1 : myo2;
+				ThalmicMyo thalmicMyo = myo.GetComponent<ThalmicMyo>();
+				if (thalmicMyo.pose == Pose.Fist && holdAction == null)
                 {
                     holdAction = StartCoroutine(HoldAction());
                 }
@@ -102,10 +114,48 @@ public class GameController : MonoBehaviour
         // TODO Minimum dan maximum strength masih di-hardcode.
 
         var player = state == GameState.P1Turn ? player1 : player2;
-        var strength = 1.0f;
+		var myo = state == GameState.P1Turn ? myo1 : myo2;
+		var strength = 1.0f;
         
+		// Access the ThalmicMyo component attached to the Myo game object.
+		ThalmicMyo thalmicMyo = myo.GetComponent<ThalmicMyo> ();
+
+		// Check if the pose has changed since last update.
+		// The ThalmicMyo component of a Myo game object has a pose property that is set to the
+		// currently detected pose (e.g. Pose.Fist for the user making a fist). If no pose is currently
+		// detected, pose will be set to Pose.Rest. If pose detection is unavailable, e.g. because Myo
+		// is not on a user's arm, pose will be set to Pose.Unknown.
+
+		/*
+		if (thalmicMyo.pose != _lastPose) {
+			_lastPose = thalmicMyo.pose;
+
+			// Vibrate the Myo armband when a fist is made.
+			if (thalmicMyo.pose == Pose.Fist) {
+				thalmicMyo.Vibrate (VibrationType.Medium);
+
+				ExtendUnlockAndNotifyUserAction (thalmicMyo);
+
+				// Change material when wave in, wave out or double tap poses are made.
+			} else if (thalmicMyo.pose == Pose.WaveIn) {
+				GetComponent<Renderer>().material = waveInMaterial;
+
+				ExtendUnlockAndNotifyUserAction (thalmicMyo);
+			} else if (thalmicMyo.pose == Pose.WaveOut) {
+				GetComponent<Renderer>().material = waveOutMaterial;
+
+				ExtendUnlockAndNotifyUserAction (thalmicMyo);
+			} else if (thalmicMyo.pose == Pose.DoubleTap) {
+				GetComponent<Renderer>().material = doubleTapMaterial;
+
+				ExtendUnlockAndNotifyUserAction (thalmicMyo);
+			}
+		}
+		*/
+
         // strength 1 -> 10
-        while (Input.GetKey(KeyCode.Space) && strength < 20)
+		Debug.Log("Myo Position"+ thalmicMyo.pose+ " hai ");
+		while (thalmicMyo.pose == Pose.Fist && strength < 20)
         {
             strength += strengthSpeed * Time.deltaTime;
             player.strength = strength;
@@ -114,9 +164,9 @@ public class GameController : MonoBehaviour
         }
         
         // Jika ternyata masih ditahan, strength 10 -> 1
-        if (Input.GetKey(KeyCode.Space))
+		if (thalmicMyo.pose == Pose.Fist)
         {
-            while (Input.GetKey(KeyCode.Space) && strength > 0)
+			while (thalmicMyo.pose == Pose.Fist && strength > 0)
             {
                 strength -= strengthSpeed * Time.deltaTime;
                 player.strength = strength;

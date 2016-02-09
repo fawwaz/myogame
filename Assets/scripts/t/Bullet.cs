@@ -53,7 +53,11 @@ public class Bullet : MonoBehaviour
         {
             // TODO Ganti efek healthnya, untuk sekarang baru health kurang nilai konstan.
             player.health -= 20;
-
+			if(player.gameObject.name == "Player1"){
+				GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().myo1.GetComponent<ThalmicMyo>().Vibrate(Thalmic.Myo.VibrationType.Medium);
+			}else if(player.gameObject.name == "Player2"){
+				GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().myo2.GetComponent<ThalmicMyo>().Vibrate(Thalmic.Myo.VibrationType.Medium);
+			}
             // Matikan trigger supaya tidak kena player manapun lagi.
             collider.isTrigger = true;
         }
