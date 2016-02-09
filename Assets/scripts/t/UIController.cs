@@ -28,25 +28,6 @@ public class UIController : MonoBehaviour
 
     void Update()
     {
-        switch (gameController.state)
-        {
-            case GameController.GameState.P1Turn:
-                turnText.text = "Player 1's turn";
-                break;
-            case GameController.GameState.P2Turn:
-                turnText.text = "Player 2's turn";
-                break;
-            case GameController.GameState.P1Win:
-                turnText.text = "Player 1 has won the game!";
-                break;
-            case GameController.GameState.P2Win:
-                turnText.text = "Player 2 has won the game!";
-                break;
-            default:
-                turnText.text = "";
-                break;
-        }
-
         player1HealthSlider.value = player1.health;
         player2HealthSlider.value = player2.health;
 
@@ -56,5 +37,31 @@ public class UIController : MonoBehaviour
         // TODO Mungkin mau ganti wind slidernya dengan yang "lebih manusiawi?"
         windLeftSlider.value = wind.strength;
         windRightSlider.value = wind.strength;
+
+        switch (gameController.state)
+        {
+            case GameController.GameState.P1Turn:
+                turnText.text = player1.health.ToString() + "   Player 1's turn   " + player2.health.ToString();
+                break;
+            case GameController.GameState.P2Turn:  
+                turnText.text = player1.health.ToString() + "   Player 2's turn   " + player2.health.ToString();
+                break;
+            case GameController.GameState.P1Win:
+                turnText.text = player1.health.ToString() + "   Player 1 has WON !   " + player2.health.ToString() ;
+                break;
+            case GameController.GameState.P2Win:
+                turnText.text = player1.health.ToString() + "   Player 2 has WON !   " + player2.health.ToString();
+                break;
+            case GameController.GameState.P1Throw:
+                turnText.text = player1.health.ToString() + "   Player 1's turn   " + player2.health.ToString();
+                break;
+            case GameController.GameState.P2Throw:
+                turnText.text = player1.health.ToString() + "   Player 2's turn   " + player2.health.ToString();
+                break;
+            default:
+                break;
+        }
+
+       
     }
 }
